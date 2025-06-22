@@ -1,0 +1,71 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.0.0/schema.json",
+  "vcs": {
+    "enabled": false,
+    "clientKind": "git",
+    "useIgnoreFile": false
+  },
+  "files": {
+    "ignoreUnknown": false
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "lineWidth": 100
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "correctness": {
+        "noUnusedImports": "error"
+      },
+      "style": {
+        "useNodejsImportProtocol": "off"
+      },
+      "nursery": {
+        "useSortedClasses": {
+          "level": "warn",
+          "fix": "safe",
+          "options": {}
+        }
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double",
+      "semicolons": "asNeeded",
+      "trailingCommas": "none",
+      "bracketSameLine": true
+    }
+  },
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "organizeImports": {
+          "level": "on",
+          "options": {
+            "groups": ["@/**"]
+          }
+        }
+      }
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["./tsconfig.app.json", "./tsconfig.node.json"],
+      "json": {
+        "parser": {
+          "allowComments": true
+        }
+      }
+    },
+    {
+      "includes": ["public/ndt7*"],
+      "formatter": { "enabled": false },
+      "linter": { "enabled": false }
+    }
+  ]
+}

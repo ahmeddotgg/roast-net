@@ -1,0 +1,51 @@
+{
+  "heroText": "See what AI says about your internet speed",
+  "card": {
+    "download": "download",
+    "upload": "upload"
+  },
+  "limit": {
+    "remaining": "Daily usage limit: {{count}}",
+    "reached": "Limit reached for today"
+  },
+  "preferences": {
+    "title": "AI Preferences",
+    "language": {
+      "label": "Language",
+      "placeholder": "Select language",
+      "options": {
+        "english": "English",
+        "arabic": "Arabic"
+      }
+    },
+    "dialect": {
+      "label": "Dialect",
+      "placeholder": "Select dialect",
+      "options": {
+        "american": "American",
+        "egyptian": "Egyptian"
+      }
+    },
+    "tone": {
+      "label": "Tone",
+      "placeholder": "Select tone",
+      "options": {
+        "sarcastic": "Sarcastic",
+        "brutal": "Brutal",
+        "friendly": "Friendly"
+      }
+    }
+  },
+  "cta": {
+    "start": "Start Speed Test 🚀"
+  },
+  "roast": {
+    "ask_ai": "Ask AI 🤖",
+    "thinking": "Thinking of the most brutal roast... 💭",
+    "result_title": "Roast Result 🔥",
+    "close": "Close ❌",
+    "dialog_label": "AI Dialog 💬",
+    "failed": "Failed to generate roast. Please try again. ⚠️",
+    "no_roast": "No roast generated. 😶"
+  }
+}
