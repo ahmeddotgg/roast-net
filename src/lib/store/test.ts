@@ -1,6 +1,5 @@
 import ndt7 from "@m-lab/ndt7"
 import { create } from "zustand"
-import { openai } from "../utils"
 import { usePreferencesStore } from "./preferences"
 import { useUsageStore } from "./usage"
 
@@ -37,8 +36,8 @@ export const useTestStore = create<TestStore>((set, get) => ({
 
   startTest: () => {
     const { disabled, increment } = useUsageStore.getState()
-    if (disabled) return // Prevent test if rate-limited
-    increment() // Consume one usage
+    if (disabled) return
+    increment()
     set({
       loading: true,
       state: "testing",
@@ -115,31 +114,35 @@ export const useTestStore = create<TestStore>((set, get) => ({
     try {
       const { dialect, language, tone } = usePreferencesStore.getState()
       const { downloadSpeed, uploadSpeed } = get()
+      const content = `Roast my internet speed — download: ${downloadSpeed}, upload: ${uploadSpeed}.
+                      Instructions:
+                      - Respond strictly and entirely in **${language}** only${dialect ? `, using the ${dialect} dialect for tone and cultural flavor` : ""}.
+                      - **Do not** mix languages or provide translations.
+                      - Use **Arabic script and RTL direction** when Arabic is selected.
+                      - Keep it sane length: **6–10 sentences max**.
+                      - Tone: ${tone || "humorous, exaggerated, culturally savage"}.
+                      - Include **3–5 emojis** naturally in the response.
+                      - Base the humor on cultural references from the ${dialect ?? "relevant"} context (e.g., food, traffic, sayings).
+                      - Ensure perfect grammar and spelling, especially in Arabic.
+                      - Do **not** explain or comment on any words or phrases.
+                      - Style Sample DNA: "🍲🚗🐢⌚💔😂"`
 
-      const response = await openai.chat.completions.create({
-        model: "deepseek/deepseek-r1:free",
-        messages: [
-          {
-            role: "user",
-            content: `Roast my internet speed — download: ${downloadSpeed}, upload: ${uploadSpeed}.
-                  Instructions:
-                  - Respond strictly and entirely in **${language}** only${dialect ? `, using the ${dialect} dialect for tone and cultural flavor` : ""}.
-                  - **Do not** mix languages or provide translations.
-                  - Use **Arabic script and RTL direction** when Arabic is selected.
-                  - Keep it sane length: **6–10 sentences max**.
-                  - Tone: ${tone || "humorous, exaggerated, culturally savage"}.
-                  - Include **3–5 emojis** naturally in the response.
-                  - Base the humor on cultural references from the ${dialect ?? "relevant"} context (e.g., food, traffic, sayings).
-                  - Ensure perfect grammar and spelling, especially in Arabic.
-                  - Do **not** explain or comment on any words or phrases.
-                  - Style Sample DNA: "🍲🚗🐢⌚💔😂"`
-          }
-        ]
+      const res = await fetch("/.netlify/functions/openai", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt: content })
       })
+
+      if (!res.ok) {
+        const errorText = await res.text()
+        throw new Error(`Server error: ${res.status} - ${errorText}`)
+      }
+
+      const { reply } = await res.json()
 
       set({
         state: "completed",
-        aiMessage: response.choices?.[0]?.message?.content || "No roast generated."
+        aiMessage: reply || "No roast generated."
       })
     } catch (error) {
       set({
