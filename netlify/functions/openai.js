@@ -6,31 +6,24 @@ export const openai = new OpenAI({
   dangerouslyAllowBrowser: true
 })
 
-export async function handler(event) {
-  try {
-    const { prompt } = JSON.parse(event.body)
+exports.handler = async (event) => {
+  const { prompt } = JSON.parse(event.body)
 
-    const completion = await openai.chat.completions.create({
-      model: "deepseek/deepseek-r1:free",
-      messages: [{ role: "user", content: prompt }]
-    })
+  const completion = await openai.chat.completions.create({
+    model: "deepseek/deepseek-r1:free",
+    messages: [{ role: "user", content: prompt }]
+  })
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({
-        reply: completion.choices?.[0]?.message?.content ?? "No reply."
-      })
-    }
-  } catch (err) {
-    console.error("Function error:", err)
+  return {
+    statusCode: 200,
+    body: JSON.stringify({ reply: completion.choices[0].message.content })
+  }
+}
 
-    return {
-      statusCode: 500,
-      body: JSON.stringify({
-        reply: null,
-        error: "OpenAI request failed",
-        details: err.message || String(err)
-      })
-    }
+exports.handler = async () => {
+  await new Promise((r) => setTimeout(r, 20000)) // wait 20 seconds
+  return {
+    statusCode: 200,
+    body: "Waited 20s!"
   }
 }

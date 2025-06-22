@@ -5,5 +5,4 @@ functions = "netlify/functions"
   node_bundler = "esbuild"
 
 [functions."openai"]
-  timeout = 30
-
+  timeout = 26
