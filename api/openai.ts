@@ -25,10 +25,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     })
   } catch (err) {
     console.error("OpenAI error:", err)
+
+    const message = err instanceof Error ? err.message : "Unknown error occurred"
+
     res.status(500).json({
       reply: null,
       error: "OpenAI request failed",
-      details: err.message
+      details: message
     })
   }
 }
