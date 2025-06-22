@@ -127,16 +127,11 @@ export const useTestStore = create<TestStore>((set, get) => ({
                       - Do **not** explain or comment on any words or phrases.
                       - Style Sample DNA: "🍲🚗🐢⌚💔😂"`
 
-      const res = await fetch("/.netlify/functions/openai", {
+      const res = await fetch("/api/openai", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt: content })
       })
-
-      if (!res.ok) {
-        const errorText = await res.text()
-        throw new Error(`Server error: ${res.status} - ${errorText}`)
-      }
 
       const { reply } = await res.json()
 
