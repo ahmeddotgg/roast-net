@@ -1,7 +1,7 @@
-<table border="0">
+<table>
   <tr>
     <td><img src="public/logo.svg" alt="RoastNet Logo" height="50"/></td>
-    <td style="font-size:4rem;"><strong>Roast Net</strong></td>
+    <td><h1>Roast Net</h1></td>
   </tr>
 </table>
 
