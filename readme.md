@@ -1,8 +1,16 @@
-# <img src="public/logo.svg" alt="RoastNet Logo" height="32" style="vertical-align:middle;"/> RoastNet
+<table border="0">
+  <tr>
+    <td><img src="public/logo.svg" alt="RoastNet Logo" height="50" style="verti"/></td>
+    <td style="font-size:2rem;"><strong>Roast Net</strong></td>
+  </tr>
+</table>
 
 A fun, modern web app to test your internet speed and get a humorous, culturally-aware roast of your results!
 
 ---
+
+
+
 
 ## 📸 Screenshots
 <img src="public/preview.png" style="border-radius: 1rem;"/>
@@ -20,12 +28,12 @@ RoastNet lets users:
 
 | Tech            | Description                        |
 |-----------------|------------------------------------|
-| <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/vite.svg" height="24" style="vertical-align:middle;"/> Vite | Lightning-fast build tool           |
-| <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/react.svg" height="24" style="vertical-align:middle;"/> React | UI library                          |
-| <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/simpleicons.svg" height="24" style="vertical-align:middle;"/> Zustand | State management                    |
-| <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/i18next.svg" height="24" style="vertical-align:middle;"/> i18next | Internationalization                |
-| <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/internetarchive.svg" height="24" style="vertical-align:middle;"/> ndt7 | Internet speed test engine          |
-| <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/openai.svg" height="24" style="vertical-align:middle;"/> ChatGPT | AI roast generation                |
+|  Vite | Lightning-fast build tool           |
+|  React | UI library                          |
+|  Zustand | State management                    |
+|  i18next | Internationalization                |
+|  ndt7 | Internet speed test engine          |
+|  OpenRouter | AI roast generation                |
 
 ---
 
