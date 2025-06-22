@@ -121,11 +121,10 @@ export const useTestStore = create<TestStore>((set, get) => ({
                       - Use **Arabic script and RTL direction** when Arabic is selected.
                       - Keep it sane length: **6–10 sentences max**.
                       - Tone: ${tone || "humorous, exaggerated, culturally savage"}.
-                      - Include **3–5 emojis** naturally in the response.
+                      - Include emojis naturally in the response.
                       - Base the humor on cultural references from the ${dialect ?? "relevant"} context (e.g., food, traffic, sayings).
                       - Ensure perfect grammar and spelling, especially in Arabic.
-                      - Do **not** explain or comment on any words or phrases.
-                      - Style Sample DNA: "🍲🚗🐢⌚💔😂"`
+                      - Do **not** explain or comment on any words or phrases.`
 
       const res = await fetch("/api/openai", {
         method: "POST",

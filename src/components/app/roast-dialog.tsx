@@ -8,6 +8,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger
 } from "@/components/ui/alert-dialog"
+import { usePreferencesStore } from "@/lib/store/preferences"
 import { useTestStore } from "@/lib/store/test"
 import { Loader } from "lucide-react"
 import { useState } from "react"
@@ -17,6 +18,7 @@ import { Button } from "../ui/button"
 export const RoastDialog = () => {
   const { t, i18n } = useTranslation()
   const { state, aiMessage, askAI, resetState, loading } = useTestStore()
+  const { language } = usePreferencesStore()
   const [open, setOpen] = useState(false)
 
   const handleOpenChange = (newOpen: boolean) => {
@@ -43,7 +45,11 @@ export const RoastDialog = () => {
           <AlertDialogTitle className="text-2xl">{t("roast.result_title")}</AlertDialogTitle>
         </AlertDialogHeader>
         <div className="rounded-md bg-accent/30 p-4 font-semibold text-muted-foreground">
-          {aiMessage && <h2 className="mb-4 leading-8">{aiMessage}</h2>}
+          {aiMessage && (
+            <h2 dir={language === "Arabic" ? "rtl" : "ltr"} className="mb-4 leading-8">
+              {aiMessage}
+            </h2>
+          )}
           {state === "roasting" && <h2>{t("roast.thinking")}</h2>}
         </div>
         <AlertDialogDescription className="sr-only">
