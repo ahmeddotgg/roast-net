@@ -1,2 +1,6 @@
 [dev]
 functions = "netlify/functions"
+
+[[functions]]
+  name = "openai"
+  timeout = 26
