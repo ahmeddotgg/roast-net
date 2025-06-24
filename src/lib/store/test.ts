@@ -1,7 +1,6 @@
 import ndt7 from "@m-lab/ndt7"
 import { create } from "zustand"
 import { usePreferencesStore } from "./preferences"
-import { useUsageStore } from "./usage"
 
 interface TestStore {
   loading: boolean
@@ -35,9 +34,6 @@ export const useTestStore = create<TestStore>((set, get) => ({
   },
 
   startTest: () => {
-    const { disabled, increment } = useUsageStore.getState()
-    if (disabled) return
-    increment()
     set({
       loading: true,
       state: "testing",
@@ -141,7 +137,8 @@ export const useTestStore = create<TestStore>((set, get) => ({
     } catch (error) {
       set({
         state: "completed",
-        aiMessage: `Failed to generate roast. Please try again, ${error}`
+        aiMessage: `Failed to generate roast. Please try again, ${error}`,
+        loading: false
       })
     }
   }

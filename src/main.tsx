@@ -15,7 +15,7 @@ createRoot(root).render(
     <div className="relative min-h-svh overflow-hidden">
       <div className="grid-pattern" />
       <main className="relative z-10 py-10 lg:py-20">
-        <Container className="space-y-4 sm:space-y-10 lg:space-y-16">
+        <Container className="space-y-10 lg:space-y-16">
           <Header />
           <TestCards />
           <HeadLine />

@@ -37,7 +37,7 @@ export const RoastDialog = () => {
     <AlertDialog open={open} onOpenChange={handleOpenChange}>
       <AlertDialogTrigger asChild>
         <Button onClick={handleTriggerClick} variant="cta" disabled={loading}>
-          {loading ? <Loader className="animate-spin" /> : t("roast.ask_ai")}
+          {state === "roasting" ? <Loader className="animate-spin" /> : t("roast.ask_ai")}
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent dir={i18n.resolvedLanguage === "ar" ? "rtl" : "ltr"}>
@@ -50,13 +50,17 @@ export const RoastDialog = () => {
               {aiMessage}
             </h2>
           )}
-          {state === "roasting" && <h2>{t("roast.thinking")}</h2>}
+          {state === "roasting" && (
+            <h2 className="flex items-center gap-2">
+              <Loader className="animate-spin" /> <span>{t("roast.thinking")}</span>
+            </h2>
+          )}
         </div>
         <AlertDialogDescription className="sr-only">
           {t("roast.dialog_label")}
         </AlertDialogDescription>
         <AlertDialogFooter>
-          <AlertDialogCancel>{t("roast.close")}</AlertDialogCancel>
+          <AlertDialogCancel disabled={state === "roasting"}>{t("roast.close")}</AlertDialogCancel>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
