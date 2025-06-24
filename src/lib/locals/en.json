@@ -5,8 +5,8 @@
     "upload": "upload"
   },
   "limit": {
-    "remaining": "Daily usage limit: {{count}}",
-    "reached": "Limit reached for today"
+    "remaining": "daily useage left is",
+    "remaining_time": "You can try again after"
   },
   "preferences": {
     "title": "AI Preferences",

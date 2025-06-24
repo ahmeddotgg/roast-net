@@ -14,7 +14,6 @@
     "clsx": "^2.1.1",
     "i18next": "^25.2.1",
     "i18next-browser-languagedetector": "^8.2.0",
-    "js-cookie": "^3.0.5",
     "lucide-react": "^0.518.0",
     "openai": "^5.6.0",
     "radix-ui": "latest",
