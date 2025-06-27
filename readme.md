@@ -63,6 +63,19 @@ VITE_OPENAI_API_KEY=sk-xxxxxxx
    ```bash
    pnpm preview
    ```
+5. **Run locally with Vercel serverless functions**
+   ```bash
+   pnpm i -g vercel@latest
+   ```
+   ```bash
+   vercel dev
+   ```
+
+---
+
+## 🛡️ API Security
+
+RoastNet uses a Vercel serverless function as a backend proxy for AI requests. This ensures your OpenAI (or OpenRouter) API keys are never exposed to the frontend or end users. All sensitive API calls are securely handled server-side.
 
 ---
 
@@ -70,5 +83,4 @@ VITE_OPENAI_API_KEY=sk-xxxxxxx
 - Modern UI/UX
 - Fun, AI-powered roasts
 - Arabic & English support
-- Daily usage rate limit (3 tests/24h)
-- Cookie-based tracking
+- Daily usage rate limit
