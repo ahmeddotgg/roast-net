@@ -56,6 +56,7 @@ export const RoastDialog = () => {
         }}>
         <AlertDialogHeader>
           <AlertDialogTitle className="text-2xl">{t("roast.result_title")}</AlertDialogTitle>
+          <p className="text-muted-foreground text-xs">{t("roast.results_subtitle")}</p>
         </AlertDialogHeader>
         <div className="rounded-md bg-accent/30 p-4 font-semibold text-muted-foreground">
           {message && (

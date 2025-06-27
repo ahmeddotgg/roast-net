@@ -43,6 +43,7 @@
     "ask_ai": "Ask AI 🤖",
     "thinking": "Thinking of the most brutal roast... 💭",
     "result_title": "Roast Result 🔥",
+    "result_subtitle": "Results maybe slow with free models. Please be patient. ⏳",
     "close": "Close ❌",
     "dialog_label": "AI Dialog 💬",
     "failed": "Failed to generate roast. Please try again. ⚠️",
