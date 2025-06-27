@@ -1,10 +1,11 @@
+import { Actions } from "@/components/app/actions"
+import { Container } from "@/components/app/container"
+import { Header } from "@/components/app/header"
+import { HeadLine } from "@/components/app/headline"
+import { Toaster } from "@/components/ui/sonner"
 import { TestCards } from "@/modules/speed-test/components/test-cards"
 import { StrictMode } from "react"
 import { createRoot } from "react-dom/client"
-import { Actions } from "./components/app/actions"
-import { Container } from "./components/app/container"
-import { Header } from "./components/app/header"
-import { HeadLine } from "./components/app/headline"
 import "./lib/i18n"
 import "./main.css"
 
@@ -21,6 +22,7 @@ createRoot(root).render(
           <HeadLine />
           <Actions />
         </Container>
+        <Toaster position="top-center" richColors />
       </main>
     </div>
   </StrictMode>

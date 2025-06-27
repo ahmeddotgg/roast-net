@@ -1,3 +1,4 @@
+import { toast } from "sonner"
 import { create } from "zustand"
 import { MAX_USES, useAppLimitStore } from "../app-limit/store"
 import { probeMlabServer, startSpeedTest } from "./ndt_client"
@@ -62,7 +63,7 @@ export const useSpeedTestStore = create<SpeedTestState>((set, get) => ({
     } else if (result === "rate-limit") {
       setStatus("rate-limited")
       resetCount()
-      alert("You're being rate-limited by M-Lab (speed test client). Try again later.")
+      toast.warning("You're being rate-limited by ndt servers. Try again later.")
     }
   }
 }))
