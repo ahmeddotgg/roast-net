@@ -12,21 +12,21 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select"
-import { preferencesData, usePreferencesStore } from "@/lib/store/preferences"
-import { useTestStore } from "@/lib/store/test"
+import { useSpeedTestStore } from "@/modules/speed-test/store"
 import { Settings } from "lucide-react"
 import { useTranslation } from "react-i18next"
-import { Button } from "../ui/button"
+import { Button } from "../../../components/ui/button"
+import { preferencesData, usePreferencesStore } from "../store"
 
 export const PreferencesDialog = () => {
   const { setPreference, ...preferences } = usePreferencesStore()
+  const { status } = useSpeedTestStore()
   const { t, i18n } = useTranslation()
-  const { loading } = useTestStore()
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button size="icon" variant="secondary" disabled={loading}>
+        <Button size="icon" variant="secondary" disabled={status === "testing"}>
           <Settings />
         </Button>
       </DialogTrigger>

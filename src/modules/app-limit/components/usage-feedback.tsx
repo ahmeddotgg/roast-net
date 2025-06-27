@@ -1,9 +1,11 @@
+import { formatTime } from "@/lib/utils"
+import { useAppLimitFeedback } from "@/modules/app-limit/useAppLimitFeedback"
 import { TriangleAlert } from "lucide-react"
 import { useTranslation } from "react-i18next"
 
 export const UsageFeedback = () => {
   const { t, i18n } = useTranslation()
-  const disabled = false
+  const { remaining, isAllowed, remainingUses } = useAppLimitFeedback()
 
   return (
     <div
@@ -11,14 +13,15 @@ export const UsageFeedback = () => {
       dir={i18n.resolvedLanguage === "ar" ? "rtl" : "ltr"}>
       <TriangleAlert size={14} className="hidden min-[300px]:block" />
 
-      {disabled && (
-        <p className="flex items-center gap-1">
-          <span className="line-clamp-1">{t("limit.remaining_time")}</span>
-          <span className="min-w-9 font-bold">(8)</span>
-        </p>
+      {isAllowed ? (
+        <span>
+          {t("limit.remaining")} ({remainingUses})
+        </span>
+      ) : (
+        <span>
+          {t("limit.remaining_time")} ({formatTime(Number(remaining))})
+        </span>
       )}
-
-      {!disabled && <span className="tabular-nums">{t("limit.remaining")} 10</span>}
     </div>
   )
 }

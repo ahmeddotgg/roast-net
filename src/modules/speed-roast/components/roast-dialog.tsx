@@ -8,49 +8,62 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger
 } from "@/components/ui/alert-dialog"
-import { usePreferencesStore } from "@/lib/store/preferences"
-import { useTestStore } from "@/lib/store/test"
+import { Button } from "@/components/ui/button"
+import { useRoastStore } from "@/modules/speed-roast/store"
+import { useSpeedTestStore } from "@/modules/speed-test/store"
+import { usePreferencesStore } from "@/modules/user-preferences/store"
 import { Loader } from "lucide-react"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
-import { Button } from "../ui/button"
 
 export const RoastDialog = () => {
-  const { t, i18n } = useTranslation()
-  const { state, aiMessage, askAI, resetState, loading } = useTestStore()
-  const { language } = usePreferencesStore()
   const [open, setOpen] = useState(false)
+
+  const { t, i18n } = useTranslation()
+
+  const { reset: resetSpeed } = useSpeedTestStore()
+  const { language } = usePreferencesStore()
+  const { status, message, generateRoast, reset: resetRoast } = useRoastStore()
 
   const handleOpenChange = (newOpen: boolean) => {
     setOpen(newOpen)
     if (!newOpen) {
-      resetState()
+      resetSpeed()
+      resetRoast()
     }
   }
 
   const handleTriggerClick = () => {
     setOpen(true)
-    askAI()
+    generateRoast()
   }
 
   return (
     <AlertDialog open={open} onOpenChange={handleOpenChange}>
       <AlertDialogTrigger asChild>
-        <Button onClick={handleTriggerClick} variant="cta" disabled={loading}>
-          {state === "roasting" ? <Loader className="animate-spin" /> : t("roast.ask_ai")}
+        <Button onClick={handleTriggerClick} variant="cta" disabled={status === "loading"}>
+          {status === "loading" || status === "success" ? (
+            <Loader className="animate-spin" />
+          ) : (
+            t("roast.ask_ai")
+          )}
         </Button>
       </AlertDialogTrigger>
-      <AlertDialogContent dir={i18n.resolvedLanguage === "ar" ? "rtl" : "ltr"}>
+      <AlertDialogContent
+        dir={i18n.resolvedLanguage === "ar" ? "rtl" : "ltr"}
+        onEscapeKeyDown={(e) => {
+          if (status === "loading") e.preventDefault()
+        }}>
         <AlertDialogHeader>
           <AlertDialogTitle className="text-2xl">{t("roast.result_title")}</AlertDialogTitle>
         </AlertDialogHeader>
         <div className="rounded-md bg-accent/30 p-4 font-semibold text-muted-foreground">
-          {aiMessage && (
+          {message && (
             <h2 dir={language === "Arabic" ? "rtl" : "ltr"} className="mb-4 leading-8">
-              {aiMessage}
+              {message}
             </h2>
           )}
-          {state === "roasting" && (
+          {status === "loading" && (
             <h2 className="flex items-center gap-2">
               <Loader className="animate-spin" /> <span>{t("roast.thinking")}</span>
             </h2>
@@ -60,7 +73,7 @@ export const RoastDialog = () => {
           {t("roast.dialog_label")}
         </AlertDialogDescription>
         <AlertDialogFooter>
-          <AlertDialogCancel disabled={state === "roasting"}>{t("roast.close")}</AlertDialogCancel>
+          <AlertDialogCancel disabled={status === "loading"}>{t("roast.close")}</AlertDialogCancel>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

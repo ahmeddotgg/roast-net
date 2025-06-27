@@ -1,8 +1,8 @@
 import { Progress } from "@/components/ui/progress"
-import { useTestStore } from "@/lib/store/test"
 import { cn } from "@/lib/utils"
 import { Download, Upload } from "lucide-react"
 import { useTranslation } from "react-i18next"
+import { useSpeedTestStore } from "../store"
 
 interface TestCardProps {
   type: "download" | "upload"
@@ -60,7 +60,7 @@ const TestCard = ({ type, speed, progress, className }: TestCardProps) => {
 
 export const TestCards = () => {
   const { i18n } = useTranslation()
-  const { downloadSpeed, downloadProgress, uploadProgress, uploadSpeed } = useTestStore()
+  const { progress, speed } = useSpeedTestStore()
 
   return (
     <div
@@ -69,14 +69,14 @@ export const TestCards = () => {
       <TestCard
         className="fade-in slide-in-from-top-10 animate-in duration-1000 ease-in-out"
         type="download"
-        speed={downloadSpeed}
-        progress={downloadProgress}
+        speed={speed.download}
+        progress={progress.download}
       />
       <TestCard
         className="fade-in slide-in-from-top-10 animate-in duration-1000 ease-in-out"
         type="upload"
-        speed={uploadSpeed}
-        progress={uploadProgress}
+        speed={speed.upload}
+        progress={progress.upload}
       />
     </div>
   )

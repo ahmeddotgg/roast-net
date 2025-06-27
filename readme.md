@@ -1,9 +1,9 @@
-<table>
-  <tr>
-    <td><img src="public/logo.svg" alt="RoastNet Logo" height="50"/></td>
-    <td><h1>Roast Net</h1></td>
-  </tr>
-</table>
+<p align="center">
+  <a href="https://roast-net.vercel.app/" target="_blank" rel="noopener noreferrer">
+    <img width="180" src="public/logo.svg" alt="logo">
+  </a>
+</p>
+<br/>
 
 A fun, modern web app to test your internet speed and get a humorous, culturally-aware roast of your results!
 
