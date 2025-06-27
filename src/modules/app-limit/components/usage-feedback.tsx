@@ -1,11 +1,10 @@
-import { formatTime } from "@/lib/utils"
 import { useAppLimitFeedback } from "@/modules/app-limit/useAppLimitFeedback"
 import { TriangleAlert } from "lucide-react"
 import { useTranslation } from "react-i18next"
 
 export const UsageFeedback = () => {
   const { t, i18n } = useTranslation()
-  const { remaining, isAllowed, remainingUses } = useAppLimitFeedback()
+  const { isAllowed, remainingUses } = useAppLimitFeedback()
 
   return (
     <div
@@ -18,9 +17,7 @@ export const UsageFeedback = () => {
           {t("limit.remaining")} ({remainingUses})
         </span>
       ) : (
-        <span>
-          {t("limit.remaining_time")} ({formatTime(Number(remaining))})
-        </span>
+        <span>{t("limit.remaining_time")} 6 hours</span>
       )}
     </div>
   )
