@@ -9,6 +9,7 @@ import {
   AlertDialogTrigger
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 import { useRoastStore } from "@/modules/speed-roast/store"
 import { useSpeedTestStore } from "@/modules/speed-test/store"
 import { usePreferencesStore } from "@/modules/user-preferences/store"
@@ -56,7 +57,9 @@ export const RoastDialog = () => {
         }}>
         <AlertDialogHeader>
           <AlertDialogTitle className="text-2xl">{t("roast.result_title")}</AlertDialogTitle>
-          <p className="text-muted-foreground text-xs">{t("roast.results_subtitle")}</p>
+          <p className={cn("text-muted-foreground text-xs", message && "hidden")}>
+            {t("roast.result_subtitle")}
+          </p>
         </AlertDialogHeader>
         <div className="rounded-md bg-accent/30 p-4 font-semibold text-muted-foreground">
           {message && (
