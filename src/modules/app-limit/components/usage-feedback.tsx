@@ -4,7 +4,13 @@ import { useTranslation } from "react-i18next"
 
 export const UsageFeedback = () => {
   const { t, i18n } = useTranslation()
-  const { isAllowed, remainingUses } = useAppLimitFeedback()
+  const { isAllowed, remainingUses, remaining } = useAppLimitFeedback()
+
+  const formatTime = (ms: number): string => {
+    const minutes = Math.floor((ms / (1000 * 60)) % 60)
+    const hours = Math.floor((ms / (1000 * 60 * 60)) % 24)
+    return `${hours}h ${minutes}m`
+  }
 
   return (
     <div
@@ -17,7 +23,9 @@ export const UsageFeedback = () => {
           {t("limit.remaining")} ({remainingUses})
         </span>
       ) : (
-        <span>{t("limit.remaining_time")} 6 hours</span>
+        <span>
+          {t("limit.remaining_time")} {formatTime(Number(remaining))}
+        </span>
       )}
     </div>
   )
