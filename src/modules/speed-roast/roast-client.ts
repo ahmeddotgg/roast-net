@@ -31,5 +31,6 @@ export function roastPrompt(): string {
             - Include emojis naturally in the response.
             - Base the humor on cultural references from the ${dialect ?? "relevant"} context (e.g., food, traffic, sayings).
             - Ensure perfect grammar and spelling, especially in Arabic.
-            - Do **not** explain or comment on any words or phrases.`
+            - Do **not** explain or comment on any words or phrases.
+            - Do **not** add any asterisk at the end or the beginning of the respone.`
 }
