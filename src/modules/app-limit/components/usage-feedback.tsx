@@ -24,7 +24,7 @@ export const UsageFeedback = () => {
         </span>
       ) : (
         <span>
-          {t("limit.remaining_time")} {formatTime(Number(remaining))}
+          {t("limit.remaining_time")} ({formatTime(Number(remaining))})
         </span>
       )}
     </div>
