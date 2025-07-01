@@ -1,16 +1,8 @@
-import { useAppLimitFeedback } from "@/modules/app-limit/useAppLimitFeedback"
 import { TriangleAlert } from "lucide-react"
 import { useTranslation } from "react-i18next"
 
 export const UsageFeedback = () => {
   const { t, i18n } = useTranslation()
-  const { isAllowed, remainingUses, remaining } = useAppLimitFeedback()
-
-  const formatTime = (ms: number): string => {
-    const minutes = Math.floor((ms / (1000 * 60)) % 60)
-    const hours = Math.floor((ms / (1000 * 60 * 60)) % 24)
-    return `${hours}h ${minutes}m`
-  }
 
   return (
     <div
@@ -18,13 +10,13 @@ export const UsageFeedback = () => {
       dir={i18n.resolvedLanguage === "ar" ? "rtl" : "ltr"}>
       <TriangleAlert size={14} className="hidden min-[300px]:block" />
 
-      {isAllowed ? (
+      {i18n ? (
         <span>
-          {t("limit.remaining")} ({remainingUses})
+          {t("limit.remaining")} ({1}/{1})
         </span>
       ) : (
         <span>
-          {t("limit.remaining_time")} ({formatTime(Number(remaining))})
+          {t("limit.remaining_time")} {Math.ceil(5000 / 1000)}s
         </span>
       )}
     </div>
