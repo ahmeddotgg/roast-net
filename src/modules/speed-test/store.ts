@@ -1,5 +1,7 @@
+import { toast } from "sonner"
 import { create } from "zustand"
 import { useAppLimit } from "../app-limit/store"
+import { checkServerBeforeTest, startSpeedTest } from "./ndt_client"
 
 type SpeedTestState = {
   status: "idle" | "probing" | "testing" | "completed" | "rate-limited"
@@ -43,9 +45,25 @@ export const useSpeedTestStore = create<SpeedTestState>((set) => ({
       progress: { download: 0, upload: 0 }
     }),
   runSpeedTest: async () => {
-    const { increment } = useAppLimit.getState()
+    const { recordUsage, isOnCooldown } = useAppLimit.getState()
 
-    console.log("running speed test")
-    increment()
+    if (isOnCooldown()) {
+      toast.warning("Speed test is on cooldown.")
+      set({ status: "idle" })
+      return
+    }
+
+    const canTest = await checkServerBeforeTest()
+
+
+    if (canTest) {
+      startSpeedTest()
+      recordUsage()
+    } else {
+      toast.error("Failed to start speed test. Please try again later.")
+      set({ status: "idle" })
+    }
+
+    
   }
 }))
