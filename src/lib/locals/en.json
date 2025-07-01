@@ -5,7 +5,7 @@
     "upload": "upload"
   },
   "limit": {
-    "remaining": "Daily usage left is",
+    "remaining": "Daily usage left is {{remaining}} of {{total}}",
     "remaining_time": "Try again after"
   },
   "preferences": {

@@ -5,7 +5,7 @@
     "upload": "رفع"
   },
   "limit": {
-    "remaining": "متبقي من الاستخدام اليومي",
+    "remaining": "متبقي من الاستخدام اليومي {{remaining}} محاولات من {{total}}",
     "remaining_time": "حاول لاحقا بعد"
   },
   "preferences": {
