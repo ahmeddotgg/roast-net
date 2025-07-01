@@ -42,7 +42,7 @@ export const RoastDialog = () => {
   return (
     <AlertDialog open={open} onOpenChange={handleOpenChange}>
       <AlertDialogTrigger asChild>
-        <Button onClick={handleTriggerClick} variant="cta" disabled={status === "loading"}>
+        <Button onClick={handleTriggerClick} variant="cta" disabled={open}>
           {t("roast.ask_ai")}
         </Button>
       </AlertDialogTrigger>
