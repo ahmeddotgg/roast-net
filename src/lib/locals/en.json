@@ -5,8 +5,8 @@
     "upload": "upload"
   },
   "limit": {
-    "remaining": "daily useage left is",
-    "remaining_time": "You can try again after"
+    "remaining": "Daily usage left is",
+    "remaining_time": "Try again after"
   },
   "preferences": {
     "title": "AI Preferences",
