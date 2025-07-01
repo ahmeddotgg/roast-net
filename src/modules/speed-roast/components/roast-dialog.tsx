@@ -43,11 +43,7 @@ export const RoastDialog = () => {
     <AlertDialog open={open} onOpenChange={handleOpenChange}>
       <AlertDialogTrigger asChild>
         <Button onClick={handleTriggerClick} variant="cta" disabled={status === "loading"}>
-          {status === "loading" || status === "success" ? (
-            <Loader className="animate-spin" />
-          ) : (
-            t("roast.ask_ai")
-          )}
+          {t("roast.ask_ai")}
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent
