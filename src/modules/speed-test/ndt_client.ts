@@ -1,4 +1,5 @@
 import ndt7 from "@m-lab/ndt7"
+import { toast } from "sonner"
 import { useSpeedTestStore } from "./store"
 
 export function startSpeedTest() {
@@ -85,6 +86,7 @@ export const checkServerBeforeTest = async () => {
     setStatus("testing")
     return true
   } else if (result === "rate-limit") {
+    toast.warning("You are beign rate limited by m-lab speed test, try again later")
     setStatus("rate-limited")
     return false
   } else {
