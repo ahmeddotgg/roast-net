@@ -1,7 +1,5 @@
-import { toast } from "sonner"
 import { create } from "zustand"
-import { MAX_USES, useAppLimitStore } from "../app-limit/store"
-import { probeMlabServer, startSpeedTest } from "./ndt_client"
+import { useAppLimit } from "../app-limit/store"
 
 type SpeedTestState = {
   status: "idle" | "probing" | "testing" | "completed" | "rate-limited"
@@ -21,7 +19,7 @@ type SpeedTestState = {
   reset: () => void
 }
 
-export const useSpeedTestStore = create<SpeedTestState>((set, get) => ({
+export const useSpeedTestStore = create<SpeedTestState>((set) => ({
   status: "idle",
   speed: { download: 0, upload: 0 },
   progress: { download: 0, upload: 0 },
@@ -45,25 +43,9 @@ export const useSpeedTestStore = create<SpeedTestState>((set, get) => ({
       progress: { download: 0, upload: 0 }
     }),
   runSpeedTest: async () => {
-    const { count, cooldownEndTimestamp, incrementCount, resetCount } = useAppLimitStore.getState()
-    const isAllowed = count < MAX_USES && !cooldownEndTimestamp
+    const { increment } = useAppLimit.getState()
 
-    if (!isAllowed) return
-
-    const { reset, setStatus } = get()
-    reset()
-    setStatus("probing")
-
-    const result = await probeMlabServer()
-
-    if (result === "ok") {
-      setStatus("testing")
-      startSpeedTest()
-      incrementCount()
-    } else if (result === "rate-limit") {
-      setStatus("rate-limited")
-      resetCount()
-      toast.warning("You're being rate-limited by ndt servers. Try again later.")
-    }
+    console.log("running speed test")
+    increment()
   }
 }))

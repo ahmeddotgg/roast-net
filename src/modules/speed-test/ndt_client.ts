@@ -74,3 +74,20 @@ export async function probeMlabServer(): Promise<"ok" | "rate-limit" | string> {
     return `Probe request failed: ${err instanceof Error ? err.message : String(err)}`
   }
 }
+
+export const checkServerBeforeTest = async () => {
+  const { setStatus } = useSpeedTestStore.getState()
+  setStatus("probing")
+
+  const result = await probeMlabServer()
+
+  if (result === "ok") {
+    setStatus("testing")
+    return true
+  } else if (result === "rate-limit") {
+    setStatus("rate-limited")
+    return false
+  } else {
+    return false
+  }
+}
